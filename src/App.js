@@ -13,6 +13,10 @@ function reducer(todos, action) {
   switch(action.type) {
     case ACTIONS.ADD_TODO:
       return [...todos, newTodo(action.payload.name)];
+    case ACTIONS.DELETE_TODO:
+      return todos.filter(todo => todo.id !== action.payload.id);
+    default:
+      return todos;
   }
 }
 
@@ -33,7 +37,7 @@ function App() {
         <h1>Todo List</h1>
       </header>
       <Form addTodo={addTodo} />
-      <TodoList todos={todos} />
+      <TodoList todos={todos} dispatch={dispatch} />
     </div>
   );
 }
